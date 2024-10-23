@@ -20,7 +20,7 @@ from market.views import AboutView, HomeView, ProductView, ProductInnerView, Pub
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', HomeView.as_view(), name='home'),  # Главная страница
+    path('home/', HomeView.as_view(), name='home'),  # Главная страница
     path('about/', AboutView.as_view(), name='about'),  # О нас
     path('products/', ProductView.as_view(), name='products'),  # Продукция
     path('products/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),  # Внутренняя страница продукта
