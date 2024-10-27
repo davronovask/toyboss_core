@@ -22,8 +22,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', HomeView.as_view(), name='home'),  # Главная страница
     path('about/', AboutView.as_view(), name='about'),  # О нас
-    path('products/', ProductView.as_view(), name='products'),  # Продукция
-    path('products/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),  # Внутренняя страница продукта
+    path('product/', ProductView.as_view(), name='product'),  # Продукция
+    path('product/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),  # Внутренняя страница продукта
     path('publications/', PublicationsView.as_view(), name='publications'),  # Публикации
     path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),# Внутренняя страница публикации
     path('recipes/', RecipesView.as_view(), name='recipes'),  # Рецепты
