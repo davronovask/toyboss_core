@@ -1,5 +1,5 @@
 from modeltranslation.translator import register, TranslationOptions
-from .models import Publication, Recipes, AboutMe, Product
+from market.models import Publication, Recipes, AboutMe, Product
 
 @register(Product)
 class ProductTranslationOptions(TranslationOptions):
