@@ -2,81 +2,62 @@
 {% load static %}
 
 {% block content %}
-<body>
-<header class="header">
-    <div class="container">
-        <div class="header-content">
-            <div class="header-logo">
-                <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}"/></a></div>
-            </div>
-            <div class="header-nav__content">
-                <div class="navigation">
-                    <ul class="nav">
-                        <div class="nav-group">
-                            <li class="nav-link active"><a href="/about">О нас</a></li>
-                            <li class="nav-link"><a href="/product">Продукция</a></li>
-                            <li class="nav-link"><a href="/publications">Публикации</a></li>
-                        </div>
-                        <div class="nav-group">
-                            <li class="nav-link"><a href="/recipes">Рецепты</a></li>>
-                        </div>
-                    </ul>
-                </div>
-                <div class="header-language">
-                    <div class="network-link">
-                        <a href="#"><img src="{% static 'img/svg/instagram-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/facebook-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/whatsapp-icon.svg' %}"/></a>
-                    </div>
-                    <div class="language-link">
-                        <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 <section class="product publications-page">
     <div class="container">
         <div class="product__content">
             <div class="product-left">
-                <h1> публикации</h1>
+                <h1>Публикации</h1>
             </div>
             <div class="product-right">
                 <div class="about-company-all">
-                    <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
+                    <div class="crumb">
+                        <a href="#">Главная</a>
+                        <a href="#">Публикации</a>
+                    </div>
                     <div class="about-company__content">
-                        <div class="about-company">
-                            <h2 class="h2">  Производитель колбасных издели халяль №1 в Кыргызстане</h2>
-                            <h5 class="h5"> 12.02.2020</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor...<span>подробнее</span></p>
-                            <img src="{% static 'img/png/img.png' %}"/><a href="#"></a>
-                        </div>
-                        <div class="about-company">
-                            <h2 class="h2">  Производитель колбасных издели халяль №1 в Кыргызстане</h2>
-                            <h5 class="h5"> 12.02.2020</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor...<span>подробнее</span></p>
-                            <img src="{% static 'img/png/img.png' %}"/><a href="#"></a>
-                        </div>
-                        <div class="about-company">
-                            <h2 class="h2">  Производитель колбасных издели халяль №1 в Кыргызстане</h2>
-                            <h5 class="h5"> 12.02.2020</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor...<span>подробнее</span></p>
-                            <img src="{% static 'img/png/img.png' %}"/><a href="#"></a>
-                        </div>
+                        {% for publication in publications %}
+                            <div class="about-company">
+                                <h2 class="h2">{{ publication.name }}</h2>
+                                <h5 class="h5">{{ publication.created_at|date:"d.m.Y" }}</h5>
+                                <p>{{ publication.content|truncatewords:20 }}...<span>подробнее</span></p>
+                                {% if publication.image %}
+                                    <img src="{{ publication.image.url }}" alt="{{ publication.name }}"/>
+                                {% else %}
+                                    <img src="{% static 'img/png/default-img.png' %}" alt="Default Image"/>
+                                {% endif %}
+                            </div>
+                        {% empty %}
+                            <p>Публикации отсутствуют.</p>
+                        {% endfor %}
                     </div>
                     <div class="publication__pagination">
-                        <div class="pagination__left"><a class="arrow-left disabled" href="#"></a></div>
-                        <div class="publication__pagination-num"><a class="active" href="#">1</a><a href="#">2</a><a href="#">3</a><a href="#">...</a><a href="#">85</a></div>
-                        <div class="pagination__right"><a class="arrow-right" href="#"></a></div>
+                        <div class="pagination__left">
+                            {% if publications.has_previous %}
+                                <a class="arrow-left" href="?page={{ publications.previous_page_number }}">←</a>
+                            {% else %}
+                                <span class="arrow-left disabled">←</span>
+                            {% endif %}
+                        </div>
+                        <div class="publication__pagination-num">
+                            {% for num in publications.paginator.page_range %}
+                                {% if publications.number == num %}
+                                    <a class="active" href="#">{{ num }}</a>
+                                {% else %}
+                                    <a href="?page={{ num }}">{{ num }}</a>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                        <div class="pagination__right">
+                            {% if publications.has_next %}
+                                <a class="arrow-right" href="?page={{ publications.next_page_number }}">→</a>
+                            {% else %}
+                                <span class="arrow-right disabled">→</span>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-</body>
 {% endblock %}

@@ -2,43 +2,6 @@
 {% load static %}
 
 {% block content %}
-<body>
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="header-logo">
-                    <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}" alt="Логотип компании"/></a></div>
-                </div>
-                <div class="header-nav__content">
-                    <div class="navigation">
-                        <ul class="nav">
-                            <div class="nav-group">
-                                <li class="nav-link active"><a href="/about">О нас</a></li>
-                                <li class="nav-link"><a href="/product">Продукция</a></li>
-                                <li class="nav-link"><a href="/publications">Публикации</a></li>
-                            </div>
-                            <div class="nav-group">
-                                <li class="nav-link"><a href="/recipes">Рецепты</a></li>
-                            </div>
-                        </ul>
-                    </div>
-                    <div class="header-language">
-                        <div class="network-link">
-                            <a href="#"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="Instagram"/></a>
-                            <a href="#"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="Facebook"/></a>
-                            <a href="#"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="WhatsApp"/></a>
-                        </div>
-                        <div class="language-link">
-                            <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}" alt="Кыргызский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}" alt="Русский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}" alt="English"/></a>
-                            <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}" alt="Қазақша"/></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
     <section class="product">
         <div class="container">
             <div class="product__content">
@@ -47,17 +10,21 @@
                 </div>
                 <div class="product-right">
                     <div class="about-company-all">
-                        <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
-                        <h2 class="h2"><a href="#">Производитель колбасных изделий халяль №1 в Кыргызстане</a></h2>
+                        <div class="crumb">
+                            <a href="#">Главная</a>
+                            <a href="#">Продукция</a>
+                            <span> Колбасы</span>
+                        </div>
+                        <h2 class="h2">
+                            <a href="#">{{about.name}}</a>
+                        </h2>
                         <div class="about-company__content">
-                            <div class="about-company">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris sit amet massa vitae tortor condimentum lacinia.</p>
-                                <img src="{% static 'img/png/img.png' %}" alt="Изображение продукции"/>
-                            </div>
-                            <div class="about-company">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris sit amet massa vitae tortor condimentum lacinia.</p>
-                                <img src="{% static 'img/png/img.png' %}" alt="Изображение продукции"/>
-                            </div>
+                            {% for about in about %}
+                                <div class="about-company">
+                                    <p>{{ about.content|safe }}</p>
+                                    <img src="{about.image.url}" alt="Изображение продукции"/>
+                                </div>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
@@ -67,5 +34,4 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
-</body>
 {% endblock %}

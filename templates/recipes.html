@@ -2,87 +2,60 @@
 {% load static %}
 
 {% block content %}
-<body>
-<header class="header">
-    <div class="container">
-        <div class="header-content">
-            <div class="header-logo">
-                <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}"/></a></div>
-            </div>
-            <div class="header-nav__content">
-                <div class="navigation">
-                    <ul class="nav">
-                        <div class="nav-group">
-                            <li class="nav-link active"><a href="/about">О нас</a></li>
-                            <li class="nav-link"><a href="/product">Продукция</a></li>
-                            <li class="nav-link"><a href="/publications">Публикации</a></li>
-                        </div>
-                        <div class="nav-group">
-                            <li class="nav-link"><a href="/recipes">Рецепты</a></li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="header-language">
-                    <div class="network-link">
-                        <a href="#"><img src="{% static 'img/svg/instagram-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/facebook-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/whatsapp-icon.svg' %}"/></a>
-                    </div>
-                    <div class="language-link">
-                        <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 <section class="product recipes">
     <div class="container">
         <div class="product__content">
             <div class="product-left">
-                <h1>рецепты</h1>
+                <h1>Рецепты</h1>
             </div>
             <div class="product-right">
                 <div class="about-company-all">
-                    <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
+                    <div class="crumb">
+                        <a href="#">Главная</a>
+                        <a href="#">Продукция</a>
+                        <span> Колбасы</span>
+                    </div>
                     <div class="about-company__content">
+                        {% for recipe in recipes %}
                         <div class="about-company">
-                            <h2 class="h2">Sausage, Mushroom and Cranberry Tart</h2>
-                            <p>Bake eggs, cheese, mushrooms, cranberries and Jimmy Dean® Pork Sausage in a fluted tart pan for a dinner as delicious as it looks!</p>
-                            <img src="{% static 'img/jpg/recipes.jpg' %}"/>
-                            <a href="#"></a>
+                            <h2 class="h2">{{ recipe.name }}</h2>
+                            <p>{{ recipe.description }}</p>
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}" />
+                            <div class="recipe-categories">
+                                {% for category in recipe.categories.all %}
+                                <span class="category">{{ category.name }}</span>
+                                {% endfor %}
+                            </div>
+                            <a href="#">Посмотреть рецепт</a>
                         </div>
-                        <div class="about-company">
-                            <h2 class="h2">Sausage, Mushroom and Cranberry Tart</h2>
-                            <p>Bake eggs, cheese, mushrooms, cranberries and Jimmy Dean® Pork Sausage in a fluted tart pan for a dinner as delicious as it looks!</p>
-                            <img src="{% static 'img/jpg/recipes.jpg' %}"/>
-                            <a href="#"></a>
-                        </div>
-                        <div class="about-company">
-                            <h2 class="h2">Sausage, Mushroom and Cranberry Tart</h2>
-                            <p>Bake eggs, cheese, mushrooms, cranberries and Jimmy Dean® Pork Sausage in a fluted tart pan for a dinner as delicious as it looks!</p>
-                            <img src="{% static 'img/jpg/recipes.jpg' %}"/>
-                            <a href="#"></a>
-                        </div>
+                        {% empty %}
+                        <p>Рецепты не найдены.</p>
+                        {% endfor %}
                     </div>
                     <div class="publication__pagination">
-                        <div class="pagination__left"><a class="arrow-left disabled" href="#"></a></div>
-                        <div class="publication__pagination-num">
-                            <a class="active" href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">...</a>
-                            <a href="#">85</a>
+                        <div class="pagination__left">
+                            {% if recipes.has_previous %}
+                                <a class="arrow-left" href="?page={{ recipes.previous_page_number }}">←</a>
+                            {% else %}
+                                <span class="arrow-left disabled">←</span>
+                            {% endif %}
                         </div>
-                        <div class="pagination__right"><a class="arrow-right" href="#"></a></div>
+                        <div class="publication__pagination-num">
+                            {% for page_num in recipes.paginator.page_range %}
+                                <a class="{% if recipes.number == page_num %}active{% endif %}" href="?page={{ page_num }}">{{ page_num }}</a>
+                            {% endfor %}
+                        </div>
+                        <div class="pagination__right">
+                            {% if recipes.has_next %}
+                                <a class="arrow-right" href="?page={{ recipes.next_page_number }}">→</a>
+                            {% else %}
+                                <span class="arrow-right disabled">→</span>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
-</body>
 {% endblock %}

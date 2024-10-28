@@ -2,187 +2,32 @@
 {% load static %}
 
 {% block content %}
-<body>
-    <header class="header">
+<main class="main__content">
+    <section class="about-us">
         <div class="container">
-            <div class="header-content">
-                <div class="header-logo">
-                    <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}" alt="Логотип компании"/></a></div>
+            <div class="about-us__content">
+                <div class="about-us__content-left">
+                    <h2>публикации</h2>
                 </div>
-                <div class="header-nav__content">
-                    <div class="navigation">
-                        <ul class="nav">
-                            <div class="nav-group">
-                                <li class="nav-link active"><a href="/about">О нас</a></li>
-                                <li class="nav-link"><a href="/product">Продукция</a></li>
-                                <li class="nav-link"><a href="/publications">Публикации</a></li>
-                            </div>
-                            <div class="nav-group">
-                                <li class="nav-link"><a href="/recipes">Рецепты</a></li>
-                            </div>
-                        </ul>
-                    </div>
-                    <div class="header-language">
-                        <div class="network-link">
-                            <a href="#"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="Instagram"/></a>
-                            <a href="#"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="Facebook"/></a>
-                            <a href="#"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="WhatsApp"/></a>
-                        </div>
-                        <div class="language-link">
-                            <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}" alt="Кыргызский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}" alt="Русский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}" alt="English"/></a>
-                            <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}" alt="Қазақша"/></a>
+                <div class="publications__all">
+                    {% for publication in publications %}
+                    <div class="publications__card">
+                        <div class="about-us__content-right">
+                            <h2 data-mh="my-group"><a href="#">{{ publication.name }}</a></h2>
+                            <h5 class="h5">{{ publication.created_at|date:"d.m.Y" }}</h5>
+                            <p data-mh="my-group1">{{ publication.content|truncatewords:20 }}...<span>подробнее</span></p>
+                            {% if publication.image %}
+                                <div class="content-right__img">
+                                    <img src="{{ publication.image.url }}" alt="{{ publication.name }}"/>
+                                </div>
+                            {% endif %}
+                            <a class="link__detail" href="#">подробнее о нас</a>
                         </div>
                     </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
-    </header>
-    <main class="main__content">
-        <section class="main-slider-section test" style="background: url('{% static 'img/jpg/slider-background.jpg' %}')">
-            <div class="container">
-                <div class="main-slider">
-                    <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="slider-content">
-                                    <div class="product-name-img" smooth-parallax="smooth-parallax" start-movement="0" end-movement="1" start-position-y="0.1" end-position-y="-8">
-                                        <img src="{% static 'img/png/slider-product-name.png' %}"/>
-                                    </div>
-                                    <div class="product-img2" smooth-parallax="smooth-parallax" start-movement="0" end-movement="1" start-position-y="0.1" end-position-y="-3">
-                                        <img src="{% static 'img/png/product-img2.png' %}"/>
-                                    </div>
-                                    <div class="product-img3" smooth-parallax="smooth-parallax" start-movement="0" end-movement="1" start-position-y="0.1" end-position-y="3">
-                                        <img src="{% static 'img/png/product-img33.png' %}"/>
-                                    </div>
-                                    <div class="product-slider-heading">
-                                        <h3> Узнайте как вкуснее</h3>
-                                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                                        <a class="link__detail" href="#">Наша продукция</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="about-us">
-            <div class="container">
-                <div class="about-us__content">
-                    <div class="about-us__content-left">
-                        <h2> О НАС</h2>
-                    </div>
-                    <div class="about-us__content-right">
-                        <h2><a href="#">Производитель колбасных издели халяль №1 в Кыргызстане</a></h2>
-                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                        <div class="content-right__img"><img src="{% static 'img/png/img.png' %}"/></div>
-                        <a class="link__detail" href="#">подробнее о нас</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="whats-tastier" style="background: url('{% static 'img/jpg/slider-background.jpg' %}')">
-            <div class="whats-tastier__img1" smooth-parallax="smooth-parallax" start-movement="0.1" end-movement=".4" start-position-x="-.8" end-position-x="0">
-                <img src="{% static 'img/png/img5.png' %}"/>
-            </div>
-            <div class="whats-tastier__img2" smooth-parallax="smooth-parallax" start-movement="0.1" end-movement=".4" start-position-y=".8" end-position-y="0">
-                <img src="{% static 'img/png/img6.png' %}"/>
-            </div>
-            <div class="container">
-                <div class="whats-tastier__content">
-                    <div class="product-slider-heading">
-                        <h3> Узнайте как вкуснее</h3>
-                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                        <a class="link__detail" href="#">Наша продукция</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="about-us">
-            <div class="container">
-                <div class="about-us__content">
-                    <div class="about-us__content-left">
-                        <h2> Награды</h2>
-                    </div>
-                    <div class="about-us__content-right">
-                        <div class="awards__img-all">
-                            <div class="swiper-container2">
-                                <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
-                                        <div class="awards__img-block">
-                                            <div class="awards__img"><a href="#"><img src="{% static 'img/png/icon-best.png' %}"/></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="awards__img-block">
-                                            <div class="awards__img"><a href="#"><img src="{% static 'img/png/icon-best.png' %}"/></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="awards__img-block">
-                                            <div class="awards__img"><a href="#"><img src="{% static 'img/png/icon-best.png' %}"/></a></div>
-                                        </div>
-                                    </div>
-                                    <div class="swiper-slide">
-                                        <div class="awards__img-block">
-                                            <div class="awards__img"><a href="#"><img src="{% static 'img/png/icon-best.png' %}"/></a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-button-next"></div>
-                                <div class="swiper-button-prev"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="whats-tastier" style="background: url('{% static 'img/jpg/slider-background.jpg' %}')">
-            <div class="whats-tastier__img1" smooth-parallax="smooth-parallax" start-movement="0.4" end-movement=".7" start-position-x="-.8" end-position-x="0">
-                <img src="{% static 'img/png/img5.png' %}"/>
-            </div>
-            <div class="whats-tastier__img2" smooth-parallax="smooth-parallax" start-movement="0.4" end-movement=".7" start-position-y=".8" end-position-y="0">
-                <img src="{% static 'img/png/img6.png' %}"/>
-            </div>
-            <div class="container">
-                <div class="whats-tastier__content">
-                    <div class="product-slider-heading">
-                        <h3> Узнайте как вкуснее</h3>
-                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                        <a class="link__detail" href="#">рецепты</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="about-us">
-            <div class="container">
-                <div class="about-us__content">
-                    <div class="about-us__content-left">
-                        <h2> публикации</h2>
-                    </div>
-                    <div class="publications__all">
-                        <div class="publications__card">
-                            <div class="about-us__content-right">
-                                <h2 data-mh="my-group"><a href="#">Производитель колбасных</a></h2>
-                                <p data-mh="my-group1">  Миссия компании заключается в том</p>
-                                <div class="content-right__img"><img src="{% static 'img/png/img.png' %}"/></div>
-                                <a class="link__detail" href="#">подробнее о нас</a>
-                            </div>
-                        </div>
-                        <div class="publications__card">
-                            <div class="about-us__content-right">
-                                <h2 data-mh="my-group"><a href="#">Производитель колбасных издели халяль №1 в Кыргызстане</a></h2>
-                                <p data-mh="my-group1">  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                                <div class="content-right__img"><img src="{% static 'img/png/img.png' %}"/></div>
-                                <a class="link__detail" href="#">подробнее о нас</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-</body>
+    </section>
+</main>
 {% endblock %}

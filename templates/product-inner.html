@@ -2,43 +2,6 @@
 {% load static %}
 
 {% block content %}
-<body>
-<header class="header">
-    <div class="container">
-        <div class="header-content">
-            <div class="header-logo">
-                <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}"/></a></div>
-            </div>
-            <div class="header-nav__content">
-                <div class="navigation">
-                    <ul class="nav">
-                        <div class="nav-group">
-                          <li class="nav-link active"><a href="/about">О нас</a></li>
-                          <li class="nav-link"><a href="/product">Продукция</a></li>
-                          <li class="nav-link"><a href="/publications">Публикации</a></li>
-                        </div>
-                        <div class="nav-group">
-                            <li class="nav-link"><a href="/recipes">Рецепты</a></li>
-                        </div>
-                    </ul>
-                </div>
-                <div class="header-language">
-                    <div class="network-link">
-                        <a href="#"><img src="{% static 'img/svg/instagram-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/facebook-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/whatsapp-icon.svg' %}"/></a>
-                    </div>
-                    <div class="language-link">
-                        <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}"/></a>
-                        <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}"/></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
 <section class="product">
     <div class="container">
         <div class="product__content">
@@ -177,6 +140,5 @@
         </div>
     </div>
 </section>
-</body>
 {% endblock %}
 
