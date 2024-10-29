@@ -17,19 +17,26 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from django.views.i18n import set_language
+
 from market.views import AboutView, HomeView, ProductView, ProductInnerView, PublicationsInnerView, PublicationView, RecipesInnerView, RecipesView
+from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('home/', HomeView.as_view(), name='home'),  # Главная страница
+]
+
+# Добавляем маршруты для мультиязычности
+urlpatterns += i18n_patterns(
+    path('set_language/', set_language, name='set_language'),
+    path('', HomeView.as_view(), name='home'),  # Главная страница
     path('about/', AboutView.as_view(), name='about'),  # О нас
     path('product/', ProductView.as_view(), name='product'),  # Продукция
     path('product/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),  # Внутренняя страница продукта
     path('publications/', PublicationView.as_view(), name='publications'),  # Публикации
-    path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),# Внутренняя страница публикации
+    path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),  # Внутренняя страница публикации
     path('recipes/', RecipesView.as_view(), name='recipes'),  # Рецепты
     path('recipes/<int:pk>/', RecipesInnerView.as_view(), name='recipes_inner'),  # Внутренняя страница рецепта
-]
-
+)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

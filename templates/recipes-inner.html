@@ -6,34 +6,24 @@
     <div class="container">
         <div class="product__content">
             <div class="product-left">
-                <h1>рецепты</h1>
+                <h1>Рецепты</h1>
             </div>
             <div class="product-right">
                 <div class="about-company-all">
                     <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
                     <div class="recipes__content">
                         <div class="recipes__content-block">
-                            <h2 class="h2">Sausage, Mushroom and Cranberry Tart</h2>
-                            <img src="{% static 'img/jpg/recipes2.jpg' %}"/>
-                            <p class="p">Bake eggs, cheese, mushrooms, cranberries and Jimmy Dean® Pork Sausage in a fluted tart pan for a dinner as delicious as it looks!</p>
+                            <h2 class="h2">{{ recipes.name }}</h2>
+                            <img src="{{ recipes.image.url }}" alt="{{ recipes.name }}"/>
+                            <p class="p">{{ recipes.description }}</p>
                         </div>
                         <div class="recipes__content-block">
                             <h2 class="h2">Ingredients</h2>
-                            <p>1 package Premium Pork Regular Sausage</p>
-                            <p>1 refrigerated pie crust</p>
-                            <p>3 tablespoons butter</p>
-                            <p>½ cups sliced fresh button mushrooms</p>
-                            <p>1 ½ cups sliced fresh baby Portobello mushrooms</p>
-                            <p>2 eggs, lightly beaten</p>
-                            <p>1 ½ cups (6 ounces) shredded Gruyere or Swiss cheese</p>
-                            <p>¾ cup dried cranberries, divided</p>
-                            <p>½ cup whipping cream</p>
-                            <p>3 tablespoons minced fresh parsley</p>
-                            <p>2 green onions, thinly sliced</p>
+                            <p>{{ recipes.ingredients }}</p>
                         </div>
                         <div class="recipes__content-block">
                             <h2 class="h2">Directions</h2>
-                            <p>Preheat oven to 450°F. Press pie crust onto bottom and up side of 9-inch fluted tart pan with removable bottom; trim edge, reserving trimmings. Prick bottom of crust with fork. Bake 10-12 minutes or until golden brown. Cool. Reduce heat to 375°F. Cook sausage in large skillet over MEDIUM-HIGH heat 8-10 minutes or until thoroughly cooked, stirring frequently. Remove from skillet; set aside. Melt butter in same skillet. Add mushrooms; cook 5 min. or until tender, stirring occasionally. Place in large bowl. Add eggs, cheese, ½ cup cranberries, cream, parsley and sausage mixture; mix well. Pour into tart shell. Roll out reserved pie crust trimmings on lightly floured surface. Use cookie cutters to cut into decorative shapes; arrange over filling. Bake 25-30 minutes or until knife inserted in center comes out clean. Top with onions and remaining cranberries. Cut into 8 wedges to serve.</p>
+                            <p>{{ recipes.directions }}</p>
                         </div>
                     </div>
                 </div>
@@ -46,36 +36,16 @@
         <div class="product-sausage">
             <div class="product-right">
                 <div class="product__card-all">
+                    {% for product in recipes.products.all %}
                     <div class="product__card-inner">
                         <div class="product__card">
-                            <div class="product__card-img" data-mh="my-group3"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group">Фирменная</h4><a href="#"></a>
+                            <div class="product__card-img" data-mh="my-group3">
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}"/>
+                            </div>
+                            <h4 data-mh="my-group">{{ product.name }}</h4><a href="#"></a>
                         </div>
                     </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img" data-mh="my-group3"><img src="{% static 'img/png/img9.png' %}"/></div>
-                            <h4 data-mh="my-group">Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img" data-mh="my-group3"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group">Байская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img" data-mh="my-group3"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group">Байская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img" data-mh="my-group3"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group">Байская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}  <!-- Загрузка модуля интернационализации -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -20,32 +21,44 @@
         <div class="container">
             <div class="header-content">
                 <div class="header-logo">
-                    <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}" alt="Логотип компании"/></a></div>
+                    <div class="header-logo__img"><a href="#"><img src="{% static 'img/svg/logo-header.svg' %}" alt="{% trans 'Логотип компании' %}"/></a></div>
                 </div>
                 <div class="header-nav__content">
                     <div class="navigation">
                         <ul class="nav">
                             <div class="nav-group">
-                                <li class="nav-link active"><a href="/about">О нас</a></li>
-                                <li class="nav-link"><a href="/product">Продукция</a></li>
-                                <li class="nav-link"><a href="/publications">Публикации</a></li>
+                                <li class="nav-link active"><a href="/about">{% trans "О нас" %}</a></li>
+                                <li class="nav-link"><a href="/product">{% trans "Продукция" %}</a></li>
+                                <li class="nav-link"><a href="/publications">{% trans "Публикации" %}</a></li>
                             </div>
                             <div class="nav-group">
-                                <li class="nav-link"><a href="/recipes">Рецепты</a></li>
+                                <li class="nav-link"><a href="/recipes">{% trans "Рецепты" %}</a></li>
                             </div>
                         </ul>
                     </div>
                     <div class="header-language">
                         <div class="network-link">
-                            <a href="{{ social_media.instagram }}"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="Instagram"/></a>
-                            <a href="{{ social_media.facebook }}"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="Facebook"/></a>
-                            <a href="{{ social_media.phone_number }}"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="WhatsApp"/></a>
+                            <a href="{{ social_media.instagram }}"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="{% trans 'Instagram' %}"/></a>
+                            <a href="{{ social_media.facebook }}"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="{% trans 'Facebook' %}"/></a>
+                            <a href="{{ social_media.phone_number }}"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="{% trans 'WhatsApp' %}"/></a>
                         </div>
                         <div class="language-link">
-                            <a href="#"><img src="{% static 'img/svg/kg-icon.svg' %}" alt="Кыргызский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/ru-icon.svg' %}" alt="Русский"/></a>
-                            <a href="#"><img src="{% static 'img/svg/en-icon.svg' %}" alt="English"/></a>
-                            <a href="#"><img src="{% static 'img/svg/kz-icon.svg' %}" alt="Қазақша"/></a>
+                     <div class="language-switcher">
+                        <form method="post" action="{% url 'set_language' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="ru">
+                            <button type="submit" style="background: none; border: none; padding: 0;">
+                                <img src="{% static 'img/svg/ru-icon.svg' %}" alt="{% trans 'Русский' %}" style="width: 30px; height: 30px;"/>
+                            </button>
+                        </form>
+                        <form method="post" action="{% url 'set_language' %}" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="language" value="en">
+                            <button type="submit" style="background: none; border: none; padding: 0;">
+                                <img src="{% static 'img/svg/en-icon.svg' %}" alt="{% trans 'English' %}" style="width: 30px; height: 30px;"/>
+                            </button>
+                        </form>
+                    </div>
                         </div>
                     </div>
                 </div>
@@ -53,27 +66,27 @@
         </div>
     </header>
 
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    {% endblock %}
 
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <div class="footer-logo"><a href="#">Разработано YOUR-NAME &copy; <span id="current-year"></span></a></div>
+                <div class="footer-logo"><a href="#">{% trans 'Разработано YOUR-NAME' %} &copy; <span id="current-year"></span></a></div>
                 <div class="footer-nav-content">
                     <nav>
                         <ul>
-                            <li><a href="/about">О нас</a></li>
-                            <li><a href="/product">Продукция</a></li>
-                            <li><a href="/publications">Публикации</a></li>
-                            <li><a href="/recipes">Рецепты</a></li>
+                            <li><a href="/about">{% trans "О нас" %}</a></li>
+                            <li><a href="/product">{% trans "Продукция" %}</a></li>
+                            <li><a href="/publications">{% trans "Публикации" %}</a></li>
+                            <li><a href="/recipes">{% trans "Рецепты" %}</a></li>
                         </ul>
                     </nav>
                     <div class="footer-link">
                         <div class="network-link">
-                            <a href="{{ social_media.instagram }}"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="Instagram"/></a>
-                            <a href="{{ social_media.facebook }}"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="Facebook"/></a>
-                            <a href="{{ social_media.phone_number }}"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="WhatsApp"/></a>
+                            <a href="{{ social_media.instagram }}"><img src="{% static 'img/svg/instagram-icon.svg' %}" alt="{% trans 'Instagram' %}"/></a>
+                            <a href="{{ social_media.facebook }}"><img src="{% static 'img/svg/facebook-icon.svg' %}" alt="{% trans 'Facebook' %}"/></a>
+                            <a href="{{ social_media.phone_number }}"><img src="{% static 'img/svg/whatsapp-icon.svg' %}" alt="{% trans 'WhatsApp' %}"/></a>
                         </div>
                     </div>
                 </div>

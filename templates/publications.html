@@ -19,7 +19,7 @@
                             <div class="about-company">
                                 <h2 class="h2">{{ publication.name }}</h2>
                                 <h5 class="h5">{{ publication.created_at|date:"d.m.Y" }}</h5>
-                                <p>{{ publication.content|truncatewords:20 }}...<span>подробнее</span></p>
+                                <p>{{ publication.content|truncatewords:20 }}... <a href="{% url 'publications_inner' publication.id %}">подробнее</a></p>
                                 {% if publication.image %}
                                     <img src="{{ publication.image.url }}" alt="{{ publication.name }}"/>
                                 {% else %}

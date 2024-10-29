@@ -2,137 +2,31 @@
 {% load static %}
 
 {% block content %}
-<section class="product">
+<section class="product recipes-inner">
     <div class="container">
         <div class="product__content">
             <div class="product-left">
-                <h1> Продукция</h1>
+                <h1>{{ recipe.name }}</h1>
             </div>
             <div class="product-right">
-                <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="parallax" style="background: url('{% static 'img/jpg/slider-background.jpg' %}')">
-    <div class="paralax-img"><img src="{% static 'img/png/img9.png' %}"/></div>
-    <div class="paralax-img2"><img src="{% static 'img/png/img10.png' %}"/></div>
-    <div class="parallax-heading">
-        <h2>полукапченые колбасы</h2>
-    </div>
-</section>
-<section class="product__inner">
-    <div class="container">
-        <div class="product-right">
-            <div class="product__inner-content">
-                <div class="product__inner-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                <div class="productinner-heading-all">
-                    <div class="product__inner-heading">
-                        <h2>  Фирменная</h2>
-                        <h3> Колбаса полукапченая</h3>
-                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
+                <div class="about-company-all">
+                    <div class="crumb">
+                        <a href="#">Главная</a>
+                        <a href="#">Продукция</a>
+                        <span> Колбасы</span>
                     </div>
-                    <div class="product__inner-heading">
-                        <h2>  Состав</h2>
-                        <p>  Миссия компании заключается в том, чтобы прикладывать все силы для улучшения качества жизни наших потребителей.</p>
-                    </div>
-                    <div class="product__inner-heading">
-                        <h2>Рецепты</h2>
-                        <div class="product__inner-card-all">
-                            <div class="product__inner-cards">
-                                <div class="product__inner-card">
-                                    <div class="product__inner-card-img"><img src="{% static 'img/png/img.png' %}" data-mh="my-group2"/></div>
-                                    <div class="product__inner-card-heading">
-                                        <p>Миссия компании заключается в том, чтобы прикладывать все силы для</p>
-                                    </div><a href="#"></a>
-                                </div>
-                            </div>
-                            <div class="product__inner-cards">
-                                <div class="product__inner-card">
-                                    <div class="product__inner-card-img"><img src="{% static 'img/png/img.png' %}" data-mh="my-group2"/></div>
-                                    <div class="product__inner-card-heading">
-                                        <p>Миссия компании заключается в том, чтобы прикладывать</p>
-                                    </div><a href="#"></a>
-                                </div>
-                            </div>
-                            <div class="product__inner-cards">
-                                <div class="product__inner-card">
-                                    <div class="product__inner-card-img"><img src="{% static 'img/png/img.png' %}" data-mh="my-group2"/></div>
-                                    <div class="product__inner-card-heading">
-                                        <p>Миссия компании заключается в том.</p>
-                                    </div><a href="#"></a>
-                                </div>
-                            </div>
+                    <div class="recipes__content">
+                        <div class="recipes__content-block">
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.name }}"/>
+                            <p class="p">{{ recipe.description }}</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="about-product">
-    <div class="container">
-        <div class="product-sausage">
-            <div class="product-right">
-                <div class="product__card-all">
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Фирменная</h4><a href="#"></a>
+                        <div class="recipes__content-block">
+                            <h2 class="h2">Ingredients</h2>
+                            <p>{{ recipe.ingredients }}</p>
                         </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская Мусульманская Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Фирменная</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img12.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская Мусульманская Мусульманская Мусульманская</h4><a href="#"></a>
-                        </div>
-                    </div>
-                    <div class="product__card-inner">
-                        <div class="product__card">
-                            <div class="product__card-img"><img src="{% static 'img/png/img9.png' %}"/></div>
-                            <h4 data-mh="my-group"> Байская</h4><a href="#"></a>
+                        <div class="recipes__content-block">
+                            <h2 class="h2">Directions</h2>
+                            <p>{{ recipe.directions }}</p>
                         </div>
                     </div>
                 </div>
@@ -141,4 +35,3 @@
     </div>
 </section>
 {% endblock %}
-

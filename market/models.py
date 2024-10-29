@@ -3,6 +3,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator, MinLeng
 from django.db import models
 from solo.models import SingletonModel
 
+
 class ProductCategory(models.Model):
     """Модель категории товара."""
 
@@ -16,12 +17,17 @@ class ProductCategory(models.Model):
         return self.name
 
 class Recipes(models.Model):
-    """Модель рецепта."""
+    """Model for recipes."""
     name = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='recipes/')  # Изображение рецепта
-    description = models.TextField()  # Описание рецепта
-    categories = models.ManyToManyField(ProductCategory, related_name='recipes')  # Связь многие ко многим
+    description = models.TextField()
+    ingredients = models.TextField()
+    directions = models.TextField()
+    image = models.ImageField(upload_to='recipes/')
+    categories = models.ManyToManyField(ProductCategory)
+    directions = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
     class Meta:
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
@@ -38,6 +44,7 @@ class Product(models.Model):
     category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')  # Внешний ключ на категорию
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    composition = models.TextField(blank=True)
 
     class Meta:
         verbose_name_plural = 'Товары'

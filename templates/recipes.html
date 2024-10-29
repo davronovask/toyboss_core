@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <section class="product recipes">
@@ -26,7 +27,7 @@
                                 <span class="category">{{ category.name }}</span>
                                 {% endfor %}
                             </div>
-                            <a href="#">Посмотреть рецепт</a>
+                            <a href="{% url 'recipes_inner' recipe.id %}">Посмотреть рецепт</a>
                         </div>
                         {% empty %}
                         <p>Рецепты не найдены.</p>

@@ -39,6 +39,14 @@ class ProductView(TemplateView ):
 class ProductInnerView(TemplateView):
     template_name = 'product-inner.html'
 
+    def product_inner(request, product_id):
+        product = Product.objects.get(id=product_id)
+        recipes = product.recipes.all()
+        context = {
+            'product': product,
+            'recipes': recipes
+        }
+        return render(request, 'product-inner.html', context)
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         pk = self.kwargs.get('pk')
@@ -54,7 +62,6 @@ class PublicationView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        # Получаем все публикации
         publication_list = Publication.objects.all()
 
         # Пагинация
@@ -68,11 +75,12 @@ class PublicationView(TemplateView):
 
 class PublicationsInnerView(TemplateView):
     template_name = 'publications-inner.html'
-    def get_context_data(self, **kwargs):
-        context = {
-            'social_media': SocialMediaContact.objects.first()
-        }
-        return context
+    def publication_detail(request, publication_id):
+        # Fetch the publication by ID or return a 404 error if not found
+        publication = get_object_or_404(Publication, id=publication_id)
+
+        # Pass the publication object to the template
+        return render(request, 'publications-inner.html', {'publication': publication})
 
 class RecipesView(TemplateView):
     template_name = 'recipes.html'
@@ -95,9 +103,12 @@ class RecipesView(TemplateView):
 
 class RecipesInnerView(TemplateView):
     template_name = 'recipes-inner.html'
-    def get_context_data(self, **kwargs):
-        context = {
-            'social_media': SocialMediaContact.objects.first()
-        }
-        return context
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        # Get the recipe_id from the URL
+        recipe_id = self.kwargs.get('recipe_id')
+        context['social_media'] = SocialMediaContact.objects.first()
+
+        return context
