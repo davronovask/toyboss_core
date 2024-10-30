@@ -24,14 +24,13 @@ class Recipes(models.Model):
     directions = models.TextField()
     image = models.ImageField(upload_to='recipes/')
     categories = models.ManyToManyField(ProductCategory)
-    directions = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name
     class Meta:
         verbose_name = 'Рецепт'
         verbose_name_plural = 'Рецепты'
-        ordering = ['name']  # Сортировка по названию
+        ordering = ['name']
 
     def __str__(self):
         return self.name
@@ -41,7 +40,7 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     image = models.ImageField(upload_to='product/')
-    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')  # Внешний ключ на категорию
+    category = models.ForeignKey(ProductCategory, on_delete=models.CASCADE, related_name='products')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     composition = models.TextField(blank=True)
@@ -57,7 +56,7 @@ class Product(models.Model):
 class AboutMe(models.Model):
     name = models.CharField(max_length=100, null=True, blank=True)
     content = RichTextField()
-    image = models.ImageField(null=True, blank=True)  # Image is optional
+    image = models.ImageField(null=True, blank=True)
 
     class Meta:
         verbose_name = 'O нас'

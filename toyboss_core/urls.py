@@ -30,13 +30,13 @@ urlpatterns = [
 # Добавляем маршруты для мультиязычности
 urlpatterns += i18n_patterns(
     path('set_language/', set_language, name='set_language'),
-    path('', HomeView.as_view(), name='home'),  # Главная страница
-    path('about/', AboutView.as_view(), name='about'),  # О нас
-    path('product/', ProductView.as_view(), name='product'),  # Продукция
-    path('product/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),  # Внутренняя страница продукта
-    path('publications/', PublicationView.as_view(), name='publications'),  # Публикации
-    path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),  # Внутренняя страница публикации
+    path('', HomeView.as_view(), name='home'),
+    path('about/', AboutView.as_view(), name='about'),
+    path('product/', ProductView.as_view(), name='product'),
+    path('product/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),
+    path('publications/', PublicationView.as_view(), name='publications'),
+    path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),
     path('recipes/', RecipesView.as_view(), name='recipes'),  # Рецепты
-    path('recipes/<int:pk>/', RecipesInnerView.as_view(), name='recipes_inner'),  # Внутренняя страница рецепта
+    path('recipes/<int:pk>/', RecipesInnerView.as_view(), name='recipes_inner'),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

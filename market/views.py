@@ -11,8 +11,8 @@ class AboutView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['about'] = AboutMe.objects.all()  # Fetch all AboutMe objects
-        context['social_media'] = SocialMediaContact.objects.first()  # Fetch social media data
+        context['about'] = AboutMe.objects.all()
+        context['social_media'] = SocialMediaContact.objects.first()
         return context
 
 class HomeView(TemplateView):
@@ -20,7 +20,6 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Fetch the two most recent publications based on created_at
         context['publications'] = Publication.objects.all().order_by('-created_at')[:2]
         return context
 
@@ -65,7 +64,7 @@ class PublicationView(TemplateView):
         publication_list = Publication.objects.all()
 
         # Пагинация
-        paginator = Paginator(publication_list, 10)
+        paginator = Paginator(publication_list, 3)
         page_number = self.request.GET.get('page')
         publications = paginator.get_page(page_number)
 
@@ -76,10 +75,8 @@ class PublicationView(TemplateView):
 class PublicationsInnerView(TemplateView):
     template_name = 'publications-inner.html'
     def publication_detail(request, publication_id):
-        # Fetch the publication by ID or return a 404 error if not found
         publication = get_object_or_404(Publication, id=publication_id)
 
-        # Pass the publication object to the template
         return render(request, 'publications-inner.html', {'publication': publication})
 
 class RecipesView(TemplateView):
