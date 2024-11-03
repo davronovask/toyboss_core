@@ -20,23 +20,22 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.i18n import set_language
 
-from market.views import AboutView, HomeView, ProductView, ProductInnerView, PublicationsInnerView, PublicationView, RecipesInnerView, RecipesView
+from market.views import AboutView, HomeView, ProductView, ProductsDetailView, PublicationDetailView, PublicationView, RecipeDetailView, RecipesView
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 ]
 
-# Добавляем маршруты для мультиязычности
 urlpatterns += i18n_patterns(
     path('set_language/', set_language, name='set_language'),
     path('', HomeView.as_view(), name='home'),
-    path('about/', AboutView.as_view(), name='about'),
-    path('product/', ProductView.as_view(), name='product'),
-    path('product/<int:pk>/', ProductInnerView.as_view(), name='product_inner'),
-    path('publications/', PublicationView.as_view(), name='publications'),
-    path('publications/<int:pk>/', PublicationsInnerView.as_view(), name='publications_inner'),
-    path('recipes/', RecipesView.as_view(), name='recipes'),  # Рецепты
-    path('recipes/<int:pk>/', RecipesInnerView.as_view(), name='recipes_inner'),
+    path('about', AboutView.as_view(), name='about'),
+    path('product', ProductView.as_view(), name='product'),
+    path('product/<int:pk>', ProductsDetailView.as_view(), name='product_inner'),
+    path('publications', PublicationView.as_view(), name='publications'),
+    path('publications/<int:pk>', PublicationDetailView.as_view(), name='publications_inner'),
+    path('recipes', RecipesView.as_view(), name='recipes'),  # Рецепты
+    path('recipes/<int:pk>', RecipeDetailView.as_view(), name='recipes_inner'),
 )
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

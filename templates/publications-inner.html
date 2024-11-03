@@ -1,59 +1,43 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
-
 {% block content %}
-
-  <body>
-
-    <section class="product publications-inner-page">
-      <div class="container">
-        <div class="product__content">
-          <div class="product-left">
-            <h1> публикации</h1>
+<section class="product publications-inner-page">
+  <div class="container">
+    <div class="product__content">
+      <div class="product-left">
+        <h1>{{ publication.name }}</h1>
+      </div>
+      <div class="product-right">
+        <div class="about-company-all">
+          <div class="crumb">
+            <a href="{% url 'home' %}">Главная</a>
+            <a href="{% url 'product' %}">Продукция</a>
+            <span> Колбасы</span>
           </div>
-          <div class="product-right">
-            <div class="about-company-all">
-              <div class="crumb"><a href="#">Главная</a><a href="#">Продукция</a><span> Колбасы</span></div>
-              <div class="about-company__content">
-                <div class="about-company">
-                  <h2 class="h2">  Производитель колбасных издели халяль №1 в Кыргызстане</h2>
-                  <h5 class="h5"> 12.02.2020</h5>
-                  <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris</p>
-                  <div class="about-company__img">
-                    <div class="main-slider">
-                      <div class="swiper-container">
-                        <div class="swiper-wrapper">
-                          <div class="swiper-slide">
-                            <div class="publications-inner-img"><img src="{% static 'img/png/img.png' %}"/></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="publications-inner-img"><img src="{% static 'img/png/img.png' %}"/></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="publications-inner-img"><img src="{% static 'img/png/img.png' %}"/></div>
-                          </div>
-                          <div class="swiper-slide">
-                            <div class="publications-inner-img"><img src="{% static 'img/png/img.png' %}"/></div>
-                          </div>
+          <div class="about-company__content">
+            <div class="about-company">
+              <h5 class="h5">{{ publication.created_at|date:"Y-m-d" }}</h5>
+              <p>{{ publication.content }}</p>
+              <div class="about-company__img">
+                <div class="main-slider">
+                  <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide">
+                        <div class="publications-inner-img">
+                          <img src="{{ publication.image.url }}" alt="{{ publication.name }}"/>
                         </div>
-                        <div class="swiper-pagination"></div>
                       </div>
                     </div>
+                    <div class="swiper-pagination"></div>
                   </div>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit ut aliquam, purus sit amet luctus venenatis, lectus magna fringilla urna, porttitor rhoncus dolor purus non enim praesent elementum facilisis leo, vel fringilla est ullamcorper eget nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum dui faucibus in ornare quam viverra orci sagittis eu volutpat odio facilisis mauris sit amet massa vitae tortor condimentum lacinia</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-    <script src="https://unpkg.com/swiper@11.1.14/swiper.min.js"></script>
-    <script src="js/libs.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+    </div>
+  </div>
+</section>
 {% endblock %}

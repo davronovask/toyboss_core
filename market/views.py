@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template.context_processors import request
 from django.views.generic import TemplateView, ListView
 from django.shortcuts import render
 from market.models import Product, SocialMediaContact, AboutMe, ProductCategory, Recipes, Publication
@@ -35,15 +36,23 @@ class ProductView(TemplateView ):
         return context
 
 
-class ProductInnerView(TemplateView):
+class ProductsDetailView(TemplateView):
     template_name = 'product-inner.html'
 
-    def product_inner(request, product_id):
-        product = Product.objects.get(id=product_id)
-        recipes = product.recipes.all()
+    def get_context_data(self, **kwargs):
+        product_pk = kwargs['pk']
+        product = get_object_or_404(Product, id=product_pk)
+        recipes = Recipes.objects.filter(product=product)
+
+        related_products = (Product.objects
+                            .filter(category=product.category)
+                            .exclude(id=product_pk))
         context = {
             'product': product,
-            'recipes': recipes
+            'recipes': recipes,
+            'related_products': related_products,
+            'social_media': SocialMediaContact.objects.first()
+
         }
         return render(request, 'product-inner.html', context)
     def get_context_data(self, **kwargs):
@@ -72,12 +81,18 @@ class PublicationView(TemplateView):
         context['social_media'] = SocialMediaContact.objects.first()
         return context
 
-class PublicationsInnerView(TemplateView):
+class PublicationDetailView(TemplateView):
     template_name = 'publications-inner.html'
-    def publication_detail(request, publication_id):
-        publication = get_object_or_404(Publication, id=publication_id)
 
-        return render(request, 'publications-inner.html', {'publication': publication})
+    def get_context_data(self, **kwargs):
+        publication_pk = kwargs['pk']
+        publication = get_object_or_404(Publication, id=publication_pk)
+        context = {
+            'publication': publication,
+            'social_media': SocialMediaContact.objects.first()
+
+        }
+        return context
 
 class RecipesView(TemplateView):
     template_name = 'recipes.html'
@@ -98,14 +113,14 @@ class RecipesView(TemplateView):
         return context
 
 
-class RecipesInnerView(TemplateView):
+class RecipeDetailView(TemplateView):
     template_name = 'recipes-inner.html'
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        recipe_pk = kwargs['pk']
+        context = {
+            'recipes-detail-list': Recipes.objects.get(id=recipe_pk),
+            'social_media': SocialMediaContact.objects.first(),
 
-        # Get the recipe_id from the URL
-        recipe_id = self.kwargs.get('recipe_id')
-        context['social_media'] = SocialMediaContact.objects.first()
-
+        }
         return context
